@@ -14,7 +14,7 @@
     "javascript.autoClosingTags": false,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
     "typescript.autoClosingTags": false,
-    "editor.autoIndent": false,
+    "editor.autoIndent": "advanced",
 	"files.eol": "\n",
 	"jshint.enable": false
 }

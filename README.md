@@ -1,12 +1,16 @@
 # :zap: React App Cryptocurrency
 
 * Crypto currency app using React
-* **Note:** to open web links in a new window use: _ctrl+click on link_
+* Especially configured for Oliver Nabani [Twitch](
+https://www.twitch.tv/olivernabani/) and [Youtube](
+https://www.youtube.com/c/OliverNabani) channel.
 
-![GitHub repo size](https://img.shields.io/github/repo-size/AndrewJBateman/react-app-cryptocurrency?style=plastic)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/AndrewJBateman/react-app-cryptocurrency?style=plastic)
-![GitHub Repo stars](https://img.shields.io/github/stars/AndrewJBateman/react-app-cryptocurrency?style=plastic)
-![GitHub last commit](https://img.shields.io/github/last-commit/AndrewJBateman/react-app-cryptocurrency?style=plastic)
+
+
+![GitHub repo size](https://img.shields.io/github/repo-size/jfmoura/react-app-cryptocurrency?style=plastic)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/jfmoura/react-app-cryptocurrency?style=plastic)
+![GitHub Repo stars](https://img.shields.io/github/stars/jfmoura/react-app-cryptocurrency?style=plastic)
+![GitHub last commit](https://img.shields.io/github/last-commit/jfmoura/react-app-cryptocurrency?style=plastic)
 
 ## :page_facing_up: Table of contents
 
@@ -26,6 +30,8 @@
 
 * Lists prices of cryptocurrencies against the US dollar - setup can be changed via http request.
 
+* Click over rows refresh all prices.
+
 ## :camera: Screenshots
 
 ![Example screenshot](./img/crypto-api.png).
@@ -39,12 +45,15 @@
 ## :floppy_disk: Setup
 
 * API does not require an API key.
+* installation `npm i`
 * `npm start` Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 * `npm run build` Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
 
 ## :computer: Code Examples
 
 * extract of `App.js` - axios http asynchronous call to cryptocurrency API.
+
+* extract of App.js - axios http asynchronous call to forex API.
 
 ```javascript
 
@@ -53,15 +62,16 @@ function will be carried out once app loads
 axios is promise-based so then function used
 cryptocompare returns price of 3 bitcoins compared to the US $.
 */
-componentDidMount() {
-  const fsymsList = 'BTC,XRP,BCH,ETH,ZEC,EOS,XMR,ETC,LTC,DASH,QTUM,NEO,XLM,TRX,ADA,BTS,USDT,XUC,PAX,IOT'
-    axios
-      .get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=' + fsymsList + '&tsyms=USD')
-      .then(res => {
+  componentDidMount() {
+    axios.get("https://min-api.cryptocompare.com/data/pricemulti?fsyms=" + this.state.fsymsList + "&tsyms=" + this.state.currencies).then((res) => {
       const cryptos = res.data;
-      console.log(cryptos);
-      this.setState({cryptos: cryptos});
+      this.setState({ cryptos });
     });
+    axios.get(`https://open.er-api.com/v6/latest/${this.state.currencies[0]}`).then((res) => {
+      const currencyMarket = res.data.rates[this.state.currencies[1]];
+      this.setState({ currencyMarket });
+    });
+  }
 }
 
 ```
@@ -73,6 +83,8 @@ componentDidMount() {
 
 ## :clap: Inspiration
 
+* [AndrewJBateman react-app-cryptocurrency ](https://github.com/AndrewJBateman/react-app-cryptocurrency)
+
 * [Gary Simon of Coursetro: React CryptoCurrency Tutorial - Display Exchange Data with an API sept 2017](https://www.youtube.com/watch?v=18DkUJ669kc&t=120s)
 * [CryptoCompare API](https://min-api.cryptocompare.com) for cryptocurrency prices.
 
@@ -82,4 +94,4 @@ componentDidMount() {
 
 ## :envelope: Contact
 
-* Repo created by [ABateman](https://github.com/AndrewJBateman), email: gomezbateman@yahoo.com
+* Repo created by [Jorge Fernandes (jfmoura)](https://github.com/jfmoura), email: https://jfmoura@yahoo.com
